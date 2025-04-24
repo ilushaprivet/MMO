@@ -100,8 +100,9 @@ for epoch in range(50):
         images, labels = images.to(device), labels.to(device)
         ref_out = network.model(images)
         outputs = network(images)
-        loss1 = mse(outputs, ref_out) # Функция потерь между выходами оригинальной и модифицированной моделями (сохраняет поведение на чистых данных)
-        # Регуляризация на нормы ограничивающих коэффициентов (минимизирует ограничители, уменьшение ошибки)
+        loss1 = mse(outputs, ref_out) # Функция потерь между выходами оригинальной
+        # и модифицированной моделями (сохраняет поведение на чистых данных)
+        # Регуляризация на нормы ограничивающих коэффициентов
         loss2 = torch.norm(network.clamp_w1) \ 
                 + torch.norm(network.clamp_w2) \
                 + torch.norm(network.clamp_w3)
